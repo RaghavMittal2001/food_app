@@ -1,7 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { increment } from "../redux/Counterslice";
 
 export default function Card(props) {
-  const handleaddtocart = () => {};
+  
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state.counter.value);
+  
+  const handleaddtocart = async() => {
+    
+    dispatch(increment());
+    
+    
+  };
   const truncateText = (text, maxLength) => {
     if (text === undefined || text.length <= maxLength) {
       return text;

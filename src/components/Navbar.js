@@ -1,4 +1,7 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
@@ -7,6 +10,7 @@ export default function Navbar() {
     localStorage.removeItem("authtoken");
     navigate("/Login");
   };
+  const count = useSelector((state) => state.counter.value);
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-success navbar-dark">
       <div className="container-fluid">
@@ -48,7 +52,7 @@ export default function Navbar() {
           </ul>
           {!localStorage.getItem("authtoken") ? (
             <li className="d-flex">
-              <Link className="btn bg-white text-success mx-1" to="/Login" >
+              <Link className="btn bg-white text-success mx-1" to="/Login">
                 Login
               </Link>
               <Link className="btn bg-white text-success mx-1" to="/Signup">
@@ -57,9 +61,18 @@ export default function Navbar() {
             </li>
           ) : (
             <div>
-              <div className="btn bg-white text-success mx-1"> My Cart</div>
+              <div className="d-inline btn position-relative mx-3" style={{}}>
+                <i className="bi bi-cart fs-2">
+                </i>
+                  <span className="position-absolute top-0 start-100 fs-7 translate-middle badge rounded-pill bg-danger">
+                    {count}
+                  </span>
+              </div>
+              <span className="visually-hidden">unread messages</span>
+
               <Link
-                className="btn bg-white text-success mx-1" to="/Login"
+                className="btn bg-white text-success mx-1"
+                to="/Login"
                 onClick={onChange}
               >
                 Logout
