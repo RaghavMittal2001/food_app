@@ -40,7 +40,7 @@ export default function Home() {
                       .map((filteritems) => {
                         return (
                           <div key={filteritems._id} className="col-12 col-md-6 col-lg-3">
-                            <Card foodName={filteritems.name}
+                            <Card _id={filteritems._id}foodName={filteritems.name}
                             options={filteritems.options}
                             imgSrc={filteritems.img}
                             desc={filteritems.description}/>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { Link, useNavigate } from "react-router-dom";
+import Modal from "../Modal";
+import Cart from "../screen/Cart";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -10,7 +12,8 @@ export default function Navbar() {
     localStorage.removeItem("authtoken");
     navigate("/Login");
   };
-  const count = useSelector((state) => state.counter.value);
+  const [cartview,setcartview] =useState(false);
+  const count = useSelector((state) => state.todo.cart);
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary bg-success navbar-dark">
       <div className="container-fluid">
@@ -61,13 +64,19 @@ export default function Navbar() {
             </li>
           ) : (
             <div>
-              <div className="d-inline btn position-relative mx-3" style={{}}>
-                <i className="bi bi-cart fs-2">
-                </i>
-                  <span className="position-absolute top-0 start-100 fs-7 translate-middle badge rounded-pill bg-danger">
-                    {count}
-                  </span>
+              <div
+                className="d-inline btn position-relative mx-3"
+                style={{}}
+                onClick={() => {
+                  setcartview(true);
+                }}
+              >
+                <i className="bi bi-cart fs-2"></i>
+                <span className="position-absolute top-0 start-100 fs-7 translate-middle badge rounded-pill bg-danger">
+                  {count? count.length:""}
+                </span>
               </div>
+              {cartview?<Modal onClose={()=>setcartview(false)}><Cart/></Modal>:null}
               <span className="visually-hidden">unread messages</span>
 
               <Link
