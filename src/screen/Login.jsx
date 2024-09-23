@@ -30,6 +30,7 @@ export default function Login() {
       if (!json.success) {
         alert("Enter valid Credentials");
       }else{
+        localStorage.setItem("foodapp_email_id",Credentials.email)
         localStorage.setItem("authtoken",json.authToken)
         navigate("/")
       }

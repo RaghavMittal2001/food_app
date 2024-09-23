@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux';
-import { deletetodo } from '../redux/features/todoSlice';
+import { deletetodo, droptodo } from '../redux/features/todoSlice';
 
 export default function Cart() {
     let data = useSelector((state) => state.todo.cart);
@@ -22,12 +22,12 @@ export default function Cart() {
     }
 
     const handleCheckOut = async () => {
-        let userEmail = localStorage.getItem("userEmail");
+        let userEmail = localStorage.getItem("foodapp_email_id");
         console.log(data,localStorage.getItem("userEmail"),new Date())
-        let response = await fetch("http://localhost:5000/api/auth/orderData", {
+        let response = await fetch("http://localhost:5000/api/OrderData", {
+            method: 'POST',
             credentials: 'include',
             Origin:"http://localhost:3000/login",
-            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -39,7 +39,7 @@ export default function Cart() {
         });
         console.log("JSON RESPONSE:::::", response.status)
         if (response.status === 200) {
-            dispatch({ type: "DROP" })
+            dispatch(droptodo());
         }
     }
 
@@ -62,15 +62,15 @@ export default function Cart() {
                     </thead>
                     <tbody>
                         {data.map((food, index) => (
-                            <tr>
+                            <tr key={food.name || index}> 
                                 <th scope='row' >{index + 1}</th>
                                 <td >{food.name}</td>
                                 <td>{food.qty}</td>
                                 <td>{food.size}</td>
                                 <td>{food.price}</td>
-                                <td ><div type="button" className="btn p-0">
+                                <td ><div type="button" className="btn p-0" >
                                     <div onClick={() => { handleRemove(index)}}>
-                                    <i class="bi bi-trash"></i> 
+                                    <i className="bi bi-trash"></i> 
                                     </div>
                                   
                                 </div> </td></tr>
