@@ -34,7 +34,7 @@ export default function Card(props) {
         return
       }
     }
-    dispatch(addtodo({ name: props.foodName, id: props._id, price: finalPrice, qty: qty, size: size }));
+    dispatch(addtodo({ name: props.foodName, id: props._id, price: finalPrice, qty: qty, size: size,img:props.imgSrc }));
   };
   const truncateText = (text, maxLength) => {
     if (text === undefined || text.length <= maxLength) {

@@ -8,6 +8,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 import Signup from "./screen/Signup.jsx";
 import Login from "./screen/Login.jsx";
+import MyOrder from "./screen/MyOrder.jsx";
 
 
 
@@ -19,6 +20,7 @@ function App() {
         <Route exact path="/Abouts" element={<Abouts />} />
         <Route exact path="/Signup" element={<Signup/>} />
         <Route exact path="/Login" element={<Login/>} />
+        <Route exact path="/MyOrder" element={<MyOrder/>} />
       </Routes>
     </Router>
   );
